@@ -1,0 +1,39 @@
+{
+  "name": "django-oscar",
+  "version": "2.0.0",
+  "description": "A domain-driven e-commerce framework for Django",
+  "main": "index.js",
+  "dependencies": {
+    "@fullhuman/postcss-purgecss": "^2.2.0",
+    "autoprefixer": "^9.7.6",
+    "postcss-cli": "^7.1.1",
+    "tailwindcss": "^1.4.5"
+  },
+  "devDependencies": {
+    "bootstrap": "^3.4.1",
+    "bootstrap-datetime-picker": "^2.4.4",
+    "eslint": "^6.8.0",
+    "extend": ">=3.0.2",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-less": "^4.0.1",
+    "gulp-sourcemaps": "^2.6.5",
+    "inputmask": "^5.0.3",
+    "jquery": "^3.4.1",
+    "jquery-mousewheel": "^3.1.13",
+    "jquery-sortable": "^0.9.13",
+    "less": "^3.10.3",
+    "pump": "^3.0.0",
+    "select2": "4.0.13",
+    "select2-bootstrap-theme": "0.1.0-beta.10",
+    "tinymce": "^5.2.2"
+  },
+  "scripts": {
+    "build:gulp": "gulp copy && gulp less",
+    "watch": "gulp watch",
+    "eslint": "./node_modules/.bin/eslint src/oscar/static_src/oscar/js/oscar/",
+    "build:tailwind":"postcss tailwind/tailwind.css -o tailwind/app.css"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/django-oscar/django-oscar#readme"
+}
