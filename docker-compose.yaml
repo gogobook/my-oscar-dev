@@ -16,12 +16,16 @@ services:
     # depends_on:
     #   - db
     ports:
-      - "8080:8080"
+      - "3000:3000"
     volumes:
       - ./.run:/var/run/
       - ./sandbox:/usr/src/app
+      - ./.run/gunicorn:/var/run/gunicorn
+      - ./.run/redis:/var/run/redis
+      - ./.run/postgresql:/var/run/postgresql
     # command: sh -c "gunicorn -w 2 --bind=0.0.0.0 -k uvicorn.workers.UvicornWorker --log-level info app:app"
-    command: sh -c "python manage.py runserver 8080"
+    # command: sh -c " gunicorn --bind :3000 wsgi:application -w 2"
+    command: sh -c "gunicorn --bind unix:/var/run/gunicorn/gunicorn.sock wsgi:application -w 2"
 
   # db:
   #   image: postgres:12-alpine
@@ -48,29 +52,31 @@ services:
   #     - ./.run/redis:/var/run/redis
   #   command: bash -c "redis-server /usr/local/etc/redis/redis.conf"
 
-  # nginx:
-  #   image: nginx
-  #   labels:
-  #       com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
-  #   restart: always
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
-  #   volumes:
-  #     - ./web/static:/var/www/app/static        # 這裡把web (也就是django)的static files放在nginx中。
-  #     - ./web/media:/var/www/app/media          # 同樣的，把media也放在nginx中。
-  #     - ./nginx/conf.d:/etc/nginx/conf.d
-  #     - ./.run/gunicorn:/var/run/gunicorn
-  #     - ${NGINX_FILES_PATH}/vhost.d:/etc/nginx/vhost.d
-  #     - ./nginx/html:/usr/share/nginx/html # html 內放置let's encrypt 的驗證碼及google search console 的驗證碼。
-  #     # - ${NGINX_FILES_PATH}/certs:/etc/nginx/certs:ro
-  #     - ./nginx_data/certbot/conf:/etc/letsencrypt
-  #     - ./nginx_data/certbot/www:/var/www/certbot
-  #     # - ./nginx_data/nginx:/etc/nginx/conf.d
+  nginx:
+    image: nginx:alpine
+    labels:
+        com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
+    restart: always
+    depends_on:
+      - sandbox
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./sandbox/public/static:/var/www/app/static        # 這裡把web (也就是django)的static files放在nginx中。
+      - ./sandbox/public/media:/var/www/app/media          # 同樣的，把media也放在nginx中。
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./.run/gunicorn:/var/run/gunicorn
+      # - ${NGINX_FILES_PATH}/vhost.d:/etc/nginx/vhost.d
+      - ./nginx/html:/usr/share/nginx/html # html 內放置let's encrypt 的驗證碼及google search console 的驗證碼。
+      # - ${NGINX_FILES_PATH}/certs:/etc/nginx/certs:ro
+      # - ./nginx_data/certbot/conf:/etc/letsencrypt
+      # - ./nginx_data/certbot/www:/var/www/certbot
+      # - ./nginx_data/nginx:/etc/nginx/conf.d
 
-  #   # logging:
-  #   #   driver: none
-  #   command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    # logging:
+    #   driver: none
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
 
   # certbot:
   #   image: certbot/certbot

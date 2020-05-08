@@ -26,7 +26,7 @@ install-migrations-testing-requirements: ## Install migrations testing requireme
 
 assets: ## Install static assets
 	npm install
-	npm run build
+	npm run build:gulp
 
 venv: ## Create a virtual env and install test and production requirements
 	$(shell which python3) -m venv $(VENV)

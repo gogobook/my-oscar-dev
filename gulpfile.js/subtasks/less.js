@@ -5,15 +5,15 @@ const gulp = require('gulp'),
 
 module.exports = function(cb) {
     pump([
-        gulp.src('src/oscar/static/oscar/less/*.less'),
+        gulp.src('sandbox/oscar/static/oscar/less/*.less'),
         sourcemaps.init(),
         less({includePaths: [
-                'src/oscar/static/less/',
+                'sandbox/oscar/static/less/',
                 ],
                 outputStyle: null,
             }),
         sourcemaps.write('/'),
-        gulp.dest('src/oscar/static/oscar/css/')
+        gulp.dest('sandbox/oscar/static/oscar/css/')
         ],
         cb
     );

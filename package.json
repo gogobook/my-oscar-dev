@@ -32,7 +32,7 @@
     "build:gulp": "gulp copy && gulp less",
     "watch": "gulp watch",
     "eslint": "./node_modules/.bin/eslint src/oscar/static_src/oscar/js/oscar/",
-    "build:tailwind":"postcss tailwind/tailwind.css -o tailwind/app.css"
+    "build:tailwind": "postcss tailwind/tailwind.css -o sandbox/static/css/app.css"
   },
   "license": "MIT",
   "homepage": "https://github.com/django-oscar/django-oscar#readme"

@@ -54,5 +54,9 @@ ipython>=7.12,<7.14
 pycountry>=19.8,<19.9
 httpx --pre
 asonic
+gunicorn
 channels
 django-rq
+
+psycopg2-binary
+line-bot-sdk
