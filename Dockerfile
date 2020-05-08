@@ -16,6 +16,8 @@ RUN set -eux; \
         ca-certificates \
         build-essential \
         gcc \
+        clang \
+        llvm \
         libc6-dev \
         wget \
         libsasl2-dev \
