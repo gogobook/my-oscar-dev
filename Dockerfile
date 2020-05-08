@@ -3,6 +3,11 @@ FROM python:3.8.2-slim-buster
 # Generate locale C.UTF-8 for postgres and general locale data
 ENV LANG C.UTF-8
 
+ENV RUSTUP_HOME=/usr/local/rustup \
+    CARGO_HOME=/usr/local/cargo \
+    PATH=/usr/local/cargo/bin:$PATH \
+    RUST_VERSION=1.43.1
+
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
 RUN set -eux; \
     apt-get update; \

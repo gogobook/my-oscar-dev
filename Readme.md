@@ -4,3 +4,6 @@
 
 2. Do and clear by shell script and automatic.
 
+# build error
+
+ref https://github.com/moby/moby/issues/16600
