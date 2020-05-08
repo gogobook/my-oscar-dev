@@ -58,5 +58,4 @@ gunicorn
 channels
 django-rq
 
-psycopg2-binary
 line-bot-sdk
