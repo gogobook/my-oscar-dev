@@ -7,7 +7,7 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH \
     RUST_VERSION=1.43.1 \
-    LLVM_CONFIG_PATH=/usr/bin/llvm-config-3.9
+    LLVM_CONFIG_PATH=/usr/bin/llvm-config-6.0
 
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
 RUN set -eux; \
