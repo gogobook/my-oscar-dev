@@ -23,6 +23,8 @@ django-widget-tweaks>=1.4.1
 
 sorl-thumbnail>=12.6,<12.7
 easy_thumbnails
+
+## django-oscar ##
 # development
 Werkzeug>=1.0,<1.1
 django-debug-toolbar>=2.2,<2.3
@@ -30,12 +32,12 @@ django-extensions>=2.2,<2.3
 psycopg2-binary>=2.8,<2.9
 
 # Sandbox
-Pillow==7.1.1
+Pillow==7.1.2
 Whoosh==2.7.4
 django-environ==0.4.5
 django-redis==4.11.0
 pysolr==3.8.1
-redis==3.4.1
+redis==3.5.1
 requests==2.23.0
 whitenoise==5.0.1
 
@@ -48,14 +50,16 @@ isort==4.3.21
 # Helpers
 pyprof2calltree==1.4.5
 ipdb==0.13.2
-ipython>=7.12,<7.14
+ipython>=7.12,<7.15
 
 # Country data
 pycountry>=19.8,<19.9
+## django-oscar ##
+
 httpx --pre
 asonic
 gunicorn
 channels
 django-rq
-
 line-bot-sdk
+

@@ -1,4 +1,4 @@
-FROM python:3.8.2-slim-buster
+FROM python:3.8.3-slim-buster
 
 # Generate locale C.UTF-8 for postgres and general locale data
 ENV LANG C.UTF-8
@@ -7,7 +7,7 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH \
     RUST_VERSION=1.43.1 \
-    LLVM_CONFIG_PATH=/usr/bin/llvm-config-6.0
+    LLVM_CONFIG_PATH=/usr/bin/llvm-config
 
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
 RUN set -eux; \
@@ -57,7 +57,8 @@ RUN set -eux; \
         ; \
     rm -rf /var/lib/apt/lists/*;
 
-RUN cargo install sonic-server
+# panic error ref. https://github.com/valeriansaliou/sonic/issues/206
+# RUN cargo install sonic-server 
 
 COPY requirements.txt /usr/src/app/
 RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
