@@ -61,7 +61,7 @@ services:
       - sandbox
     ports:
       - "80:80"
-      - "443:443"
+      # - "443:443"
     volumes:
       - ./sandbox/public/static:/var/www/app/static        # 這裡把web (也就是django)的static files放在nginx中。
       - ./sandbox/public/media:/var/www/app/media          # 同樣的，把media也放在nginx中。
@@ -87,10 +87,11 @@ services:
   #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 24h & wait $${!}; done;'"
 
   sonic:
-    image: valeriansaliou/sonic:v1.2.3
+    image: valeriansaliou/sonic:v1.3.0
     volumes:
-      - ./sonic/sonic.cfg:/etc/sonic.cfg
+      - ./sonic/cfg:/etc/sonic
       - ./sonic/store/kv/:/var/lib/sonic/store/kv/
       - ./sonic/store/fst/:/var/lib/sonic/store/fst/
     ports:
       - 1491:1491
+    command: bash -c "sonic -c /etc/sonic/config.cfg"

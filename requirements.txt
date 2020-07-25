@@ -62,4 +62,8 @@ gunicorn
 channels
 django-rq
 line-bot-sdk
+django-picklefield
+django-constance
+django-storages
+django-bakery
 
